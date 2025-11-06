@@ -18,6 +18,13 @@ function App() {
           Learn React
         </a>
       </header>
+      <div>
+        <form>
+          <input />
+          <input />
+          <button>Create Ticket</button>
+        </form>
+      </div>
     </div>
   );
 }
