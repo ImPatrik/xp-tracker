@@ -1,23 +1,53 @@
 function Ticket() {
-return (
-        <div>
-            <form className="bg-blue-500">
-                <label>
-                    Title:
-                    <input name="titleInput" />
-                </label>
-                <label>
-                    Description:
-                    <textarea name="descInput" rows={4} cols={40}/>
-                </label>
-                <button>Create Ticket</button>
 
-                <button 
-                    type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition-colors"
-                >
-                    Create Ticket
-                </button>
+async function submitTicket(el){
+    el.preventDefault()
+
+    try {
+        let res = await fetch('http://localhost:3000/api', {
+                           method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({data:'this is my data'})
+        })
+
+        console.log('hey', res)
+    } catch (err) {
+        console.log("we have an error", err)
+    }
+}
+
+return (
+        <div className="flex items-center justify-center columns-12 bg-slate-600 p-4">
+            <title>
+                Create New Ticket
+            </title>
+            <form onSubmit={submitTicket}>
+                <label className="flex flex-wrap columns-12 p-4 text-white">
+                    <span className="w-full">Title:</span>
+                    <input 
+                        name="titleInput" 
+                        className="bg-slate-400 text-black w-full border border-slate-600"/>
+                </label>
+                <label className="flex flex-wrap columns-12 p-4 text-white">
+                    <span className="w-full"> Description: </span>
+                    <textarea 
+                        name="descInput" 
+                        className="bg-slate-400 text-black w-full border border-slate-600" 
+                        rows={4} 
+                    />
+                </label>
+                <div className="columns-12 flex">
+                    <button
+                        type="submit"
+                        className="bg-blue-400 p-2 w-full hover:bg-blue-700"
+                    >
+                        Create Ticket
+                    </button>
+                </div>
+
+
             </form>
         </div>
     );
