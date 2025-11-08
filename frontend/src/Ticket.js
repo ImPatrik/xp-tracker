@@ -1,9 +1,15 @@
 function Ticket() {
 return (
-        <div>
+        <div style={{display:"flex", flexWrap:"wrap"}}>
             <form>
-                <input />
-                <input />
+                <label>
+                    Title:
+                    <input name="titleInput" />
+                </label>
+                <label>
+                    Description:
+                    <textarea name="descInput" rows={4} cols={40}/>
+                </label>
                 <button>Create Ticket</button>
             </form>
         </div>
