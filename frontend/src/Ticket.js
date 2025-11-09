@@ -11,8 +11,6 @@ async function submitTicket(el){
                 },
                 body: JSON.stringify({data:'this is my data'})
         })
-
-        console.log('hey', res)
     } catch (err) {
         console.log("we have an error", err)
     }
@@ -23,7 +21,11 @@ return (
             <title>
                 Create New Ticket
             </title>
-            <form onSubmit={submitTicket}>
+            <form 
+                onSubmit={submitTicket} 
+                className="w-full"
+                style={{height:"1000px"}}
+            >
                 <label className="flex flex-wrap columns-12 p-4 text-white">
                     <span className="w-full">Title:</span>
                     <input 
@@ -35,7 +37,7 @@ return (
                     <textarea 
                         name="descInput" 
                         className="bg-slate-400 text-black w-full border border-slate-600" 
-                        rows={4} 
+                        rows={10} 
                     />
                 </label>
                 <div className="columns-12 flex">
