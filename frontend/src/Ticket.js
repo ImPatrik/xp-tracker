@@ -11,11 +11,12 @@ const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-        const response = await fetch('http://localhost:3000/create-ticket', {
+        const response = await fetch('http://localhost:4000/create-ticket', {
             'method': 'POST',
             'headers': {'Content-Type': 'application/json' },
             'body': JSON.stringify(ticket)
         })
+        console.log(response)
         if(response.ok){
             alert('Ticket HAS BEEN MADE LFG');
             setTicket({
@@ -31,92 +32,78 @@ const handleSubmit = async (e) => {
     }
 };
 return (
-    <form onSubmit={handleSubmit}>
-        <input 
-        type="text"
-        placeholder="Your Name"
-        value={ticket.submittedBy}
-        onChange={(e) => setTicket({...ticket, submittedBy: e.target.value})}
-        required
-        />
-        <input 
-        type="text"
-        placeholder="Ticket Title"
-        value={ticket.title}
-        onChange={(e) => setTicket({...ticket, title: e.target.value})}
-        required
-        />
-        <textarea
-        placeholder="Describe your issue"
-        value={ticket.description}
-        onChange={(e) => setTicket({...ticket, description: e.target.value})}
-        required
-        />
-        <select 
-        value={ticket.priority}
-        onChange={(e) => setTicket({...ticket, priority: e.target.value})}
-        >
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-            </select>
-            <button type="submit">Submit Ticket HOMIE</button>
-    </form>
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="bg-background-card rounded-card shadow-lg w-full max-w-md p-form-padding">
+            <h1 className="text-2xl font-bold text-text-primary mb-6 text-center">Create New Ticket</h1>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                    <label className="block text-sm font-medium text-text-secondary mb-2">
+                        Your Name
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="John Doe"
+                        value={ticket.submittedBy}
+                        onChange={(e) => setTicket({...ticket, submittedBy: e.target.value})}
+                        required
+                        className="w-full px-input-padding-x py-input-padding-y border border-border rounded-input focus:outline-none focus:ring-2 focus:ring-border-focus focus:border-transparent"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-text-secondary mb-2">
+                        Ticket Title
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="Brief description of issue"
+                        value={ticket.title}
+                        onChange={(e) => setTicket({...ticket, title: e.target.value})}
+                        required
+                        className="w-full px-input-padding-x py-input-padding-y border border-border rounded-input focus:outline-none focus:ring-2 focus:ring-border-focus focus:border-transparent"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-text-secondary mb-2">
+                        Description
+                    </label>
+                    <textarea
+                        placeholder="Describe your issue in detail..."
+                        value={ticket.description}
+                        onChange={(e) => setTicket({...ticket, description: e.target.value})}
+                        required
+                        rows={5}
+                        className="w-full px-input-padding-x py-input-padding-y border border-border rounded-input focus:outline-none focus:ring-2 focus:ring-border-focus focus:border-transparent resize-none"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-text-secondary mb-2">
+                        Priority
+                    </label>
+                    <select
+                        value={ticket.priority}
+                        onChange={(e) => setTicket({...ticket, priority: e.target.value})}
+                        className="w-full px-input-padding-x py-input-padding-y border border-border rounded-input focus:outline-none focus:ring-2 focus:ring-border-focus focus:border-transparent"
+                    >
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+
+                <button
+                    type="submit"
+                    className="w-full bg-primary text-white py-3 px-4 rounded-input hover:bg-primary-hover transition-colors font-medium mt-6"
+                >
+                    Submit Ticket
+                </button>
+            </form>
+        </div>
+    </div>
 )
 }
-// async function submitTicket(el){
-//     el.preventDefault()
-
-//     try {
-//         let res = await fetch('http://localhost:3000/api', {
-//                            method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 body: JSON.stringify({data:'this is my data'})
-//         })
-//     } catch (err) {
-//         console.log("we have an error", err)
-//     }
-// }
-
-// return (
-//         <div className="flex items-center justify-center columns-12 bg-slate-600 p-4">
-//             <title>
-//                 Create New Ticket
-//             </title>
-//             <form 
-//                 onSubmit={submitTicket} 
-//                 className="w-full"
-//                 style={{height:"1000px"}}
-//             >
-//                 <label className="flex flex-wrap columns-12 p-4 text-white">
-//                     <span className="w-full">Title:</span>
-//                     <input 
-//                         name="titleInput" 
-//                         className="bg-slate-400 text-black w-full border border-slate-600"/>
-//                 </label>
-//                 <label className="flex flex-wrap columns-12 p-4 text-white">
-//                     <span className="w-full"> Description: </span>
-//                     <textarea 
-//                         name="descInput" 
-//                         className="bg-slate-400 text-black w-full border border-slate-600" 
-//                         rows={10} 
-//                     />
-//                 </label>
-//                 <div className="columns-12 flex">
-//                     <button
-//                         type="submit"
-//                         className="bg-blue-400 p-2 w-full hover:bg-blue-700"
-//                     >
-//                         Create Ticket
-//                     </button>
-//                 </div>
-
-
-//             </form>
-//         </div>
-//     );
-// }
 
 export default Ticket;
