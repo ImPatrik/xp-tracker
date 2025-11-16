@@ -11,7 +11,7 @@ const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-        const response = await fetch('http://localhost:4000/create-ticket', {
+        const response = await fetch('http://localhost:4000/api/create-ticket', {
             'method': 'POST',
             'headers': {'Content-Type': 'application/json' },
             'body': JSON.stringify(ticket)
